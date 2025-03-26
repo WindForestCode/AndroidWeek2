@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">app2</string>
+    <string name="users">Users</string>
+    <string name="profile">Profile</string>
 </resources>

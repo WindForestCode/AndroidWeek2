@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">app2</string>
+    <string name="users">Пользователи</string>
+    <string name="profile">Профиль</string>
+</resources>
