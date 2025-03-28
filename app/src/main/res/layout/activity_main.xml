@@ -8,19 +8,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.myschool.app2.fragments.UsersFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         android:layout_weight="1"
-        />
+        app:navGraph="@navigation/bottom_menu_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
-        >
+        app:menu="@menu/bottom_nav_menu">
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
