@@ -3,4 +3,5 @@
     <string name="app_name">app2</string>
     <string name="users">Пользователи</string>
     <string name="profile">Профиль</string>
+    <string name="add">Добавить пользователя</string>
 </resources>
