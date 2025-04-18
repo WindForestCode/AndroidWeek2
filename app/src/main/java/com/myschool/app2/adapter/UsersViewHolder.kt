@@ -12,6 +12,7 @@ class UsersViewHolder(private val binding: UserItemBinding): RecyclerView.ViewHo
         binding.tvName.text = user.name
         binding.tvUsername.text = user.username
         binding.tvAddress.text = user.address
+        binding.tvInitial.text = user.name.first().toString()
 
     }
 }
