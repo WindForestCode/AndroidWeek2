@@ -5,11 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.myschool.app2.R
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.myschool.app2.database.AppDb
+import com.myschool.app2.databinding.FragmentProfileBinding
+import com.myschool.app2.model.User
+import com.myschool.app2.repository.RoomUsersRepository
+import com.myschool.app2.viewmodel.ProfileViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
 class ProfileFragment : Fragment() {
 
+    private lateinit var binding: FragmentProfileBinding
 
 
     override fun onCreateView(
@@ -17,8 +29,36 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = FragmentProfileBinding.inflate(inflater)
+
+        val viewModel by activityViewModels<ProfileViewModel> {
+            viewModelFactory {
+                initializer {
+                    ProfileViewModel(RoomUsersRepository(AppDb.getInstance(requireContext().applicationContext).userDao))
+                }
+            }
+        }
+
+        binding.buttonRefresh.setOnClickListener {
+            viewModel.refreshUser()
+        }
+
+        viewModel.uiState
+            .flowWithLifecycle(lifecycle)
+            .onEach { bindProfile(it.user)
+            }.launchIn(lifecycleScope)
+        return binding.root
     }
 
+    private fun bindProfile(user: User?){
+        binding.tvName.text = user?.name
+        binding.tvSex.text = user?.sex
+        binding.tvEmail.text = user?.email
+        binding.tvAddress.text = user?.address
+        binding.tvDateBirth.text = user?.birthday
+        binding.tvInitial.text = user?.name?.first().toString()
+        binding.tvUsername.text = user?.username
+
+    }
 
 }

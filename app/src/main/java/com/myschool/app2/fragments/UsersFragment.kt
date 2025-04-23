@@ -48,9 +48,8 @@ class UsersFragment : Fragment() {
 
         viewModel.uiState
             .flowWithLifecycle(lifecycle)
-            .onEach { uiState ->
-                adapter.submitList(uiState.user)
-                binding.rcView.scrollToPosition(0)
+            .onEach {
+                adapter.submitList(it.user)
             }.launchIn(lifecycleScope)
 
         binding.buttonAdd.setOnClickListener {
@@ -58,6 +57,7 @@ class UsersFragment : Fragment() {
                 override fun onSuccess(data: User) {
                     Log.d("NewUser", "Users updated: $data")
                     viewModel.saveUser(data)
+                    binding.rcView.scrollToPosition(0)
                 }
 
                 override fun onError(throwable: Throwable) {

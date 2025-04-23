@@ -3,6 +3,13 @@
     <string name="users">Users</string>
     <string name="profile">Profile</string>
     <string name="avatar">Avatar</string>
+    <string name="name">Name</string>
+    <string name="sex">Sex</string>
+    <string name="email" translatable="false">email</string>
+    <string name="address">Address</string>
+    <string name="birth">Birth date</string>
     <string name="add">Add user</string>
     <string name="delete">Delete all users</string>
+    <string name="refresh">Refresh</string>
+    <string name="username">Username</string>
 </resources>

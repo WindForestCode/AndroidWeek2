@@ -19,4 +19,6 @@ class RoomUsersRepository(private val dao: UserDao ): DbUsersRepository {
     override fun deleteAll() {
         dao.deleteAll()
     }
+
+    override fun getUser(): User? = dao.getUser()?.toUser()
 }

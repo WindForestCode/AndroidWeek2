@@ -15,4 +15,6 @@ interface UserDao {
     fun save(user: UserEntity): Long
     @Query("DELETE FROM users")
     fun deleteAll()
+    @Query("SELECT * FROM users ORDER BY RANDOM() LIMIT 1")
+    fun getUser(): UserEntity?
 }
