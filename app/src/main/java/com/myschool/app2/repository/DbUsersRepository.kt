@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface DbUsersRepository {
     fun getUsers(): Flow<List<User>>
     fun saveUser(user: User)
+    fun deleteAll()
 }

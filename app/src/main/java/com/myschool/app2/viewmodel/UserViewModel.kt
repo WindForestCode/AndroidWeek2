@@ -1,11 +1,10 @@
 package com.myschool.app2.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.myschool.app2.model.User
-import com.myschool.app2.repository.NetworkUsersRepository
 import com.myschool.app2.repository.RoomUsersRepository
-import com.myschool.app2.util.Callback
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,15 +21,21 @@ class UserViewModel( private val roomRepository: RoomUsersRepository): ViewModel
             .onEach { users ->
                 _uiState.update {
                     it.copy(user = users)
+
                 }
             }.launchIn(viewModelScope)
     }
 
-
-
     fun saveUser(user: User){
         roomRepository.saveUser(user)
+        roomRepository.getUsers().onEach { users ->
+            _uiState.update { it.copy(user = users) }
+        }.launchIn(viewModelScope)
 
+    }
+
+    fun delete(){
+        roomRepository.deleteAll()
     }
 
 }

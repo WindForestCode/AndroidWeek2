@@ -11,7 +11,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.myschool.app2.R
 import com.myschool.app2.adapter.UsersAdapter
 import com.myschool.app2.api.UsersApi
@@ -37,8 +37,6 @@ class UsersFragment : Fragment() {
         val api = UsersApi.INSTANCE
         val networkRepository = NetworkUsersRepository(api)
 
-
-
        val viewModel by activityViewModels<UserViewModel> {
            viewModelFactory {
                initializer {
@@ -47,9 +45,18 @@ class UsersFragment : Fragment() {
        }
 
         val adapter = UsersAdapter()
+
+        viewModel.uiState
+            .flowWithLifecycle(lifecycle)
+            .onEach { uiState ->
+                adapter.submitList(uiState.user)
+                binding.rcView.scrollToPosition(0)
+            }.launchIn(lifecycleScope)
+
         binding.buttonAdd.setOnClickListener {
             networkRepository.getUser(object : Callback<User> {
                 override fun onSuccess(data: User) {
+                    Log.d("NewUser", "Users updated: $data")
                     viewModel.saveUser(data)
                 }
 
@@ -57,21 +64,26 @@ class UsersFragment : Fragment() {
                     Log.e("UsersFragment", "Error fetching user", throwable)
                 }
             })
+
         }
 
-        binding.rcView.layoutManager = GridLayoutManager(requireContext(), 1)
+        binding.rcView.layoutManager = LinearLayoutManager(requireContext())
         binding.rcView.adapter = adapter
         binding.rcView.addItemDecoration(
             OffsetDecoration(resources.getDimensionPixelOffset(R.dimen.small_spacing))
         )
 
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle)
-            .onEach { adapter.submitList(it.user) }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
 
+
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.menu_delete -> { viewModel.delete()
+                    true
+                }
+                else -> false
+
+            }
+        }
         return binding.root
     }
-
-
 }

@@ -19,4 +19,7 @@ class UsersAdapter(): ListAdapter<User, UsersViewHolder>(UserDiffCallback()) {
         holder.bind(getItem(position))
 
     }
+    fun getCurrentListItems(): List<User> {
+        return currentList
+    }
 }

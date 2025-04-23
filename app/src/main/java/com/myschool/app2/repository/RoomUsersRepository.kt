@@ -15,4 +15,8 @@ class RoomUsersRepository(private val dao: UserDao ): DbUsersRepository {
     override fun saveUser(user: User) {
         dao.save(UserEntity.fromUser(user))
     }
+
+    override fun deleteAll() {
+        dao.deleteAll()
+    }
 }

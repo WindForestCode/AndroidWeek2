@@ -41,6 +41,7 @@ data class UserEntity(
     }
 
     fun toUser(): User = User(
+        id = id,
         username = username,
         sex = sex,
         address = address,

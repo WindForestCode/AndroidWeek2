@@ -13,4 +13,6 @@ interface UserDao {
     fun getAll(): Flow<List<UserEntity>>
     @Upsert()
     fun save(user: UserEntity): Long
+    @Query("DELETE FROM users")
+    fun deleteAll()
 }
