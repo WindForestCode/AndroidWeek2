@@ -2,7 +2,6 @@ package com.myschool.app2.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.myschool.app2.model.User
 import com.myschool.app2.repository.RoomUsersRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,12 +22,14 @@ class ProfileViewModel(private val repository: RoomUsersRepository): ViewModel()
     }
 
 
-    fun refreshUser() {
+    fun refreshUser(): Boolean {
         viewModelScope.launch {
             val user = repository.getUser()
-            _uiState.value = ProfileUiState(user)
-
+            if(user != null){
+                _uiState.value = ProfileUiState(user)
+            }
         }
+        return repository.getUser() != null
     }
 
 

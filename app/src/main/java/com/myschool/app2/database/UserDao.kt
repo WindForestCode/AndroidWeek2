@@ -17,4 +17,11 @@ interface UserDao {
     fun deleteAll()
     @Query("SELECT * FROM users ORDER BY RANDOM() LIMIT 1")
     fun getUser(): UserEntity?
+    @Query("SELECT COUNT(*) FROM users")
+    fun getCount(): Int
+
+    fun isEmpty(): Boolean{
+        return getCount() == 0
+    }
+
 }

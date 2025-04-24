@@ -1,6 +1,5 @@
 package com.myschool.app2.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.myschool.app2.model.User
