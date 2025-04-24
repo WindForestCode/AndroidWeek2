@@ -7,6 +7,7 @@
     <string name="sex">Sex</string>
     <string name="email" translatable="false">email</string>
     <string name="address">Address</string>
+    <string name="db_empty_message">User\'s database is empty </string>
     <string name="birth">Birth date</string>
     <string name="add">Add user</string>
     <string name="delete">Delete all users</string>

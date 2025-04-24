@@ -7,6 +7,7 @@
     <string name="name">Имя</string>
     <string name="sex">Пол</string>
     <string name="address">Адрес</string>
+    <string name="db_empty_message">База данных пользователей пуста</string>
     <string name="birth">Дата рождения</string>
     <string name="add">Добавить пользователя</string>
     <string name="delete">Удалить всех юзеров</string>
