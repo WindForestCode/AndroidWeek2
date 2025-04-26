@@ -4,9 +4,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myschool.app2.databinding.UserItemBinding
 import com.myschool.app2.model.User
 
-class UsersViewHolder(private val binding: UserItemBinding): RecyclerView.ViewHolder(binding.root) {
+class UsersViewHolder(private val binding: UserItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(user: User){
+    fun bind(user: User) {
 
         binding.tvDate.text = user.birthday
         binding.tvName.text = user.name

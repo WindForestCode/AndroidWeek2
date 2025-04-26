@@ -7,19 +7,19 @@ import androidx.room.RoomDatabase
 import com.myschool.app2.model.UserEntity
 
 @Database(entities = [UserEntity::class], version = 1)
-abstract class AppDb: RoomDatabase() {
+abstract class AppDb : RoomDatabase() {
     abstract val userDao: UserDao
 
-    companion object{
+    companion object {
         @Volatile
         private var INSTANCE: AppDb? = null
         fun getInstance(context: Context): AppDb {
-            INSTANCE?.let{ return it}
+            INSTANCE?.let { return it }
 
             val application = context.applicationContext
 
-            synchronized(this){
-                INSTANCE?.let{ return it}
+            synchronized(this) {
+                INSTANCE?.let { return it }
             }
 
             val appDb = Room.databaseBuilder(application, AppDb::class.java, "app_db")

@@ -22,11 +22,10 @@ data class UserEntity(
     val email: String,
     @ColumnInfo("birthday")
     val birthday: String,
-)
-{
-    companion object{
+) {
+    companion object {
 
-        fun fromUser(user: User): UserEntity = with(user){
+        fun fromUser(user: User): UserEntity = with(user) {
             UserEntity(
                 id = id,
                 username = username,

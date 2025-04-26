@@ -43,8 +43,12 @@ class ProfileFragment : Fragment() {
 
         binding.buttonRefresh.setOnClickListener {
 
-            if(!viewModel.refreshUser()){
-                Toast.makeText(context, context?.getString(R.string.db_empty_message), Toast.LENGTH_SHORT).show()
+            if (!viewModel.refreshUser()) {
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.db_empty_message),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
 
@@ -52,12 +56,13 @@ class ProfileFragment : Fragment() {
 
         viewModel.uiState
             .flowWithLifecycle(lifecycle)
-            .onEach { bindProfile(it.user)
+            .onEach {
+                bindProfile(it.user)
             }.launchIn(lifecycleScope)
         return binding.root
     }
 
-    private fun bindProfile(user: User?){
+    private fun bindProfile(user: User?) {
         binding.tvName.text = user?.name
         binding.tvSex.text = user?.sex
         binding.tvEmail.text = user?.email

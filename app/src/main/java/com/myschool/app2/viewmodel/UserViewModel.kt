@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
-class UserViewModel( private val roomRepository: RoomUsersRepository): ViewModel() {
-        private val _uiState = MutableStateFlow(UserUiState())
-        val uiState: StateFlow<UserUiState> = _uiState.asStateFlow()
+class UserViewModel(private val roomRepository: RoomUsersRepository) : ViewModel() {
+    private val _uiState = MutableStateFlow(UserUiState())
+    val uiState: StateFlow<UserUiState> = _uiState.asStateFlow()
 
     init {
         roomRepository.getUsers()
@@ -25,7 +25,7 @@ class UserViewModel( private val roomRepository: RoomUsersRepository): ViewModel
             }.launchIn(viewModelScope)
     }
 
-    fun saveUser(user: User){
+    fun saveUser(user: User) {
         roomRepository.saveUser(user)
         roomRepository.getUsers().onEach { users ->
             _uiState.update { it.copy(user = users) }
@@ -33,7 +33,7 @@ class UserViewModel( private val roomRepository: RoomUsersRepository): ViewModel
 
     }
 
-    fun delete(){
+    fun delete() {
         roomRepository.deleteAll()
     }
 

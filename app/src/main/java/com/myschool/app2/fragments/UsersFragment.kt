@@ -37,12 +37,13 @@ class UsersFragment : Fragment() {
         val api = UsersApi.INSTANCE
         val networkRepository = NetworkUsersRepository(api)
 
-       val viewModel by activityViewModels<UserViewModel> {
-           viewModelFactory {
-               initializer {
-                   UserViewModel(RoomUsersRepository(AppDb.getInstance(requireContext().applicationContext).userDao)) }
-           }
-       }
+        val viewModel by activityViewModels<UserViewModel> {
+            viewModelFactory {
+                initializer {
+                    UserViewModel(RoomUsersRepository(AppDb.getInstance(requireContext().applicationContext).userDao))
+                }
+            }
+        }
 
         val adapter = UsersAdapter()
 
@@ -76,10 +77,12 @@ class UsersFragment : Fragment() {
 
 
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.menu_delete -> { viewModel.delete()
+            when (menuItem.itemId) {
+                R.id.menu_delete -> {
+                    viewModel.delete()
                     true
                 }
+
                 else -> false
 
             }

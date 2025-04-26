@@ -6,7 +6,7 @@ import com.myschool.app2.model.UserEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class RoomUsersRepository(private val dao: UserDao ): DbUsersRepository {
+class RoomUsersRepository(private val dao: UserDao) : DbUsersRepository {
 
     override fun getUsers(): Flow<List<User>> = dao.getAll()
         .map { it.map(UserEntity::toUser) }
@@ -20,8 +20,8 @@ class RoomUsersRepository(private val dao: UserDao ): DbUsersRepository {
         dao.deleteAll()
     }
 
-    override fun getUser(): User?{
-        return if (dao.isEmpty()){
+    override fun getUser(): User? {
+        return if (dao.isEmpty()) {
             null
         } else {
             dao.getUser()?.toUser()

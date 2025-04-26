@@ -9,7 +9,7 @@ object OkHttpClientFactory {
     val INSTANCE by lazy {
         OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor{
+            .addInterceptor {
                 it.proceed(
                     it.request()
                         .newBuilder()

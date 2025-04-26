@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.myschool.app2.databinding.UserItemBinding
 import com.myschool.app2.model.User
 
-class UsersAdapter(): ListAdapter<User, UsersViewHolder>(UserDiffCallback()) {
+class UsersAdapter() : ListAdapter<User, UsersViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         val binding = UserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,6 +19,7 @@ class UsersAdapter(): ListAdapter<User, UsersViewHolder>(UserDiffCallback()) {
         holder.bind(getItem(position))
 
     }
+
     fun getCurrentListItems(): List<User> {
         return currentList
     }

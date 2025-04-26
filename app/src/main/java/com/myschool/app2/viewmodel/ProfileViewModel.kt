@@ -9,14 +9,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val repository: RoomUsersRepository): ViewModel() {
-    private val _uiState =  MutableStateFlow(ProfileUiState())
+class ProfileViewModel(private val repository: RoomUsersRepository) : ViewModel() {
+    private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
-    init{
+    init {
         viewModelScope.launch {
             val sampleUser = User(
-                0L, "username", "sex", "address", "name", "email", "birthday")
+                0L, "username", "sex", "address", "name", "email", "birthday"
+            )
             _uiState.value = ProfileUiState(sampleUser)
         }
     }
@@ -25,7 +26,7 @@ class ProfileViewModel(private val repository: RoomUsersRepository): ViewModel()
     fun refreshUser(): Boolean {
         viewModelScope.launch {
             val user = repository.getUser()
-            if(user != null){
+            if (user != null) {
                 _uiState.value = ProfileUiState(user)
             }
         }

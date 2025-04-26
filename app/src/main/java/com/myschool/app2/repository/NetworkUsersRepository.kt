@@ -7,7 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class NetworkUsersRepository(private val api: UsersApi,): UsersRepository {
+class NetworkUsersRepository(private val api: UsersApi) : UsersRepository {
 
     override fun getUser(callback: com.myschool.app2.util.Callback<User>) {
         api.getUser().enqueue(
@@ -24,6 +24,7 @@ class NetworkUsersRepository(private val api: UsersApi,): UsersRepository {
                         callback.onError(RuntimeException("Response code: ${response.code()}"))
                     }
                 }
+
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     callback.onError(t)
                 }

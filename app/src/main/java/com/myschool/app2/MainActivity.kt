@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val navController = requireNotNull(supportFragmentManager.findFragmentById(R.id.fragment_container)).findNavController()
+        val navController =
+            requireNotNull(supportFragmentManager.findFragmentById(R.id.fragment_container)).findNavController()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -29,15 +30,17 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
         binding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.bottom_menu_users -> {
                     navController.navigate(R.id.usersFragment)
                     true
                 }
+
                 R.id.bottom_menu_profile -> {
                     navController.navigate(R.id.profileFragment)
                     true
                 }
+
                 else -> false
             }
         }
